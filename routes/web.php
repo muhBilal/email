@@ -18,5 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//create route send email 
 Route::get('/send-email', [EmailController::class, 'sendEmail']);
