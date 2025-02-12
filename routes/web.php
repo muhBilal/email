@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\emailController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//create route send email 
+Route::controller(AuthenController::class)->group(function(){
+    Route::get('/login','login');
+    Route::post('/login','CheckUser')->name('login-user');
+});
+
 Route::get('/send-email', [EmailController::class, 'sendEmail']);
