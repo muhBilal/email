@@ -13,24 +13,24 @@ class AuthenController extends Controller
     {
         return view('auth.login');
     }
-    
+
     public function CheckUser(Request $request)
     {
-        $request->validate([            
-            'email'=>'required|email:users',
-            'password'=>'required|min:8|max:12'
+        $request->validate([
+            'email' => 'required|email:users',
+            'password' => 'required|min:8|max:12'
         ]);
 
-        $user = User::where('email','=',$request->email)->first();
-        if($user){
-            if(Hash::check($request->password, $user->password)){
+        $user = User::where('email', '=', $request->email)->first();
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
                 $request->session()->put('loginId', $user->id);
-                return redirect('/');
+                return redirect()->route('home');
             } else {
-                return back()->with('fail','Password not match!');
+                return back()->with('fail', 'Password not match!');
             }
         } else {
-            return back()->with('fail','This email is not register.');
-        }        
+            return back()->with('fail', 'This email is not register.');
+        }
     }
 }

@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['auth'])->name('home');
 
 Route::controller(AuthenController::class)->group(function () {
-    Route::get('/login', 'login');
+    Route::get('/login', 'login')->name('login');
     Route::post('/login', 'CheckUser')->name('login-user');
 });
 
