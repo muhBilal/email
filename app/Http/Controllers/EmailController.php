@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendEmail;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
+    public function index()
+    {
+        return view('');
+    }
+
+    public function getData(){
+        $data = DB::table('user_emails')
+            ->get();
+    }
+
     public function sendEmail()
     {
         $emails = DB::table('user_emails')
