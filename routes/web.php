@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\emailController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 })->middleware(['auth'])->name('home');
 
-Route::controller(AuthenController::class)->group(function () {
+Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
     Route::post('/login', 'CheckUser')->name('login-user');
 });
 
 Route::get('/send-email', [EmailController::class, 'sendEmail']);
+Route::get('/data', [EmailController::class, 'getData'])->name('emailData');

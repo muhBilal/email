@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendEmail;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\DataTables;
 
 class EmailController extends Controller
 {
@@ -15,9 +15,11 @@ class EmailController extends Controller
         return view('');
     }
 
-    public function getData(){
+    public function getData()
+    {
         $data = DB::table('user_emails')
             ->get();
+        return DataTables::of($data)->make(true);
     }
 
     public function sendEmail()
