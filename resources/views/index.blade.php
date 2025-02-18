@@ -124,7 +124,11 @@
                         data: null,
                         className: 'text-left px-4 py-2',
                         render(data) {
-                            return `<button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-700">Detail</button>`;
+                            return `
+                                <button onclick="updateEmail(${data.id})" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700">Update</button>
+                                <button onclick="deleteEmail(${data.id})" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-700 ml-2">Delete</button>
+                        
+                            `;
                         }
                     }
                 ],
