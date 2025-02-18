@@ -43,6 +43,7 @@
                             <option value="bandung">Bandung</option>
                         </select>
 
+                        {{-- <h1>Pilih Template</h1> --}}
                     </div>
                     <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
                         <button type="button"
