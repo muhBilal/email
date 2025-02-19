@@ -16,8 +16,7 @@
                     </th>
                     <th class="text-left px-4 py-2">ID</th>
                     <th class="text-left px-4 py-2">Nama</th>
-                    <th class="text-left px-4 py-2">Email</th>
-                    <th class="text-left px-4 py-2">Telp</th>
+                    <th class="text-left px-4 py-2">Preview</th>
                     <th class="text-left px-4 py-2">Aksi</th>
                 </tr>
             </thead>
@@ -32,7 +31,7 @@
             $('#emailTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('emailData') }}",
+                ajax: "{{ route('email-template-data') }}",
                 columns: [{
                         data: null,
                         orderable: false,
