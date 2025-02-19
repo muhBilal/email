@@ -4,13 +4,15 @@
     <h1 class="text-2xl font-bold text-gray-800 mb-4">User Email Lists</h1>
     <div>
         <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700">Kirim Email</button>
-        <button type="button"
-            class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700"
-            aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal"
-            data-hs-overlay="#hs-scale-animation-modal">
+        <button type="button" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" aria-haspopup="dialog"
+            aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-scale-animation-modal">
             Kirim by wilayah
         </button>
-        <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" id="sendAll">Kirim semua client</button>
+        <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" id="sendAll">Kirim semua
+            client</button>
+
+        <input type="file" id="fileInput" />
+        <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" id="submit">oke Client</button>
 
         <div id="hs-scale-animation-modal"
             class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
@@ -51,8 +53,7 @@
                             data-hs-overlay="#hs-scale-animation-modal">
                             Close
                         </button>
-                        <button type="button"
-                            id="sendCity"
+                        <button type="button" id="sendCity"
                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                             Save changes
                         </button>
@@ -87,61 +88,61 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $('#emailTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('emailData') }}",
-                columns: [{
-                        data: null,
-                        orderable: false,
-                        searchable: false,
-                        className: 'text-center px-4 py-2',
-                        render(data) {
-                            return `<input type="checkbox" class="user-checkbox" value="${data.id}">`;
-                        }
-                    },
-                    {
-                        data: 'id',
-                        name: 'id',
-                        className: 'text-left px-4 py-2'
-                    },
-                    {
-                        data: 'first_name',
-                        name: 'first_name',
-                        className: 'text-left px-4 py-2'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email',
-                        className: 'text-left px-4 py-2'
-                    },
-                    {
-                        data: 'phone_number',
-                        name: 'no_telepon',
-                        className: 'text-left px-4 py-2'
-                    },
-                    {
-                        data: null,
-                        className: 'text-left px-4 py-2',
-                        render(data) {
-                            return `<button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-700">Detail</button>`;
-                        }
-                    }
-                ],
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Cari email...",
-                    lengthMenu: "Tampilkan _MENU_ data"
-                },
-                initComplete: function() {
-                    $("input[type='search']").addClass(
-                        "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-4 py-2"
-                        );
-                    $("select").addClass(
-                        "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-2 py-1"
-                        );
-                }
-            });
+            // $('#emailTable').DataTable({
+            //     processing: true,
+            //     serverSide: true,
+            //     ajax: "{{ route('emailData') }}",
+            //     columns: [{
+            //             data: null,
+            //             orderable: false,
+            //             searchable: false,
+            //             className: 'text-center px-4 py-2',
+            //             render(data) {
+            //                 return `<input type="checkbox" class="user-checkbox" value="${data.id}">`;
+            //             }
+            //         },
+            //         {
+            //             data: 'id',
+            //             name: 'id',
+            //             className: 'text-left px-4 py-2'
+            //         },
+            //         {
+            //             data: 'first_name',
+            //             name: 'first_name',
+            //             className: 'text-left px-4 py-2'
+            //         },
+            //         {
+            //             data: 'email',
+            //             name: 'email',
+            //             className: 'text-left px-4 py-2'
+            //         },
+            //         {
+            //             data: 'phone_number',
+            //             name: 'no_telepon',
+            //             className: 'text-left px-4 py-2'
+            //         },
+            //         {
+            //             data: null,
+            //             className: 'text-left px-4 py-2',
+            //             render(data) {
+            //                 return `<button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-700">Detail</button>`;
+            //             }
+            //         }
+            //     ],
+            //     language: {
+            //         search: "_INPUT_",
+            //         searchPlaceholder: "Cari email...",
+            //         lengthMenu: "Tampilkan _MENU_ data"
+            //     },
+            //     initComplete: function() {
+            //         $("input[type='search']").addClass(
+            //             "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-4 py-2"
+            //             );
+            //         $("select").addClass(
+            //             "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-2 py-1"
+            //             );
+            //     }
+            // });
 
             $(document).on('change', '.user-checkbox', function() {
                 let selected = [];
@@ -196,6 +197,39 @@
                         }
                     }
                 });
+            });
+
+            $(document).on('click', '#submit', function() {
+                let file = $('#fileInput')[0].files[0];
+
+                if (!file) {
+                    alert('Pilih file terlebih dahulu!');
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('file', file);
+                formData.append('_token', "{{ csrf_token() }}");
+
+                $.ajax({
+                    url: "{{ route('importClient') }}",
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            alert('File berhasil diimport');
+                        } else {
+
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr);
+                        alert('Terjadi kesalahan saat mengupload file!');
+                    }
+                });
+
             });
         });
     </script>
