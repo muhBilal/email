@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ClientsImport;
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class EmailController extends Controller
 {
     public function index()
     {
-        return view('');
+        return view('index');
     }
 
     public function getData()
@@ -38,10 +40,11 @@ class EmailController extends Controller
             }
             $message = 'This is a test email';
             $subject = 'Email Promotion';
+            $templateId = 1;
 
             foreach ($emails as $data) {
                 $email = $data->email;
-                Mail::to($email)->send(new SendEmail($message, $subject));
+                Mail::to($email)->send(new SendEmail($message, $subject, $templateId));
             }
 
             return response()->json(['status' => 'success', 'message' => 'Email sent successfully']);

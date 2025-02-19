@@ -11,13 +11,14 @@ class EmailTemplateController extends Controller
 {
     public function index()
     {
-        return view('emailTemplates.index');
+        return view('pages/email-template/index');
     }
 
-    public function getData(){
+    public function getData()
+    {
         $data = DB::table('email_templates')
             ->get();
-        return DataTables::of($data)->make(true);        
+        return DataTables::of($data)->make(true);
     }
 
     public function create()
@@ -34,18 +35,18 @@ class EmailTemplateController extends Controller
 
         EmailTemplate::create($request->all());
         return redirect()->route('emailTemplates.index')
-                         ->with('success', 'Template berhasil ditambahkan.');
+            ->with('success', 'Template berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-        try{
+        try {
             $template = EmailTemplate::findOrFail($id);
             return response()->json([
                 'status' => 'success',
                 'data' => $template
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
@@ -55,36 +56,36 @@ class EmailTemplateController extends Controller
 
     public function update(Request $request, $id)
     {
-      try{
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'content' => 'required|string|max:255',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'content' => 'required|string|max:255',
+            ]);
 
-        $template = EmailTemplate::findOrFail($id);
-        $template->update($request->all());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Template berhasil diperbarui.'
-        ]);
-      }catch(\Exception $e){
-        return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage()
-        ]);
-      }
+            $template = EmailTemplate::findOrFail($id);
+            $template->update($request->all());
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Template berhasil diperbarui.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
     public function destroy($id)
     {
-        try{
+        try {
             $template = EmailTemplate::findOrFail($id);
             $template->delete();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Template berhasil dihapus.'
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
