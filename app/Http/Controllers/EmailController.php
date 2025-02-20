@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\ClientsImport;
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Maatwebsite\Excel\Facades\Excel;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class EmailController extends Controller
 {
@@ -19,7 +17,7 @@ class EmailController extends Controller
 
     public function getData()
     {
-        $data = DB::table('client')
+        $data = DB::table('clients')
             ->get();
         return DataTables::of($data)->make(true);
     }
@@ -27,24 +25,21 @@ class EmailController extends Controller
     public function sendEmail(Request $request)
     {
         try {
-            $city = $request->city;
-            if ($city) {
-                $emails = DB::table('client')
-                    ->where('city', $city)
-                    ->select('email')
-                    ->get();
-            } else {
-                $emails = DB::table('client')
-                    ->select('email')
-                    ->get();
+            $emailsQuery = DB::table('clients')->select('email');
+
+            if ($request->selectedEmail) {
+                $emailsQuery->whereIn('id', $request->selectedEmail);
+            } elseif ($request->city) {
+                $emailsQuery->where('city', $request->city);
             }
+
+            $emails = $emailsQuery->get();
             $message = 'This is a test email';
             $subject = 'Email Promotion';
             $templateId = 1;
 
             foreach ($emails as $data) {
-                $email = $data->email;
-                Mail::to($email)->send(new SendEmail($message, $subject, $templateId));
+                Mail::to($data->email)->send(new SendEmail($message, $subject, $templateId));
             }
 
             return response()->json(['status' => 'success', 'message' => 'Email sent successfully']);

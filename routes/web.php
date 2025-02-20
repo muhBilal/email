@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\emailController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EmailTemplateController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +29,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendEmail');
 Route::get('/data', [EmailController::class, 'getData'])->name('emailData');
 Route::post('/import-client', [ClientController::class, 'importFile'])->name('importClient');
+
+Route::get('/data', 'App\Http\Controllers\EmailController@getData')->name('emailData');
 
 Route::controller(EmailTemplateController::class)->group(function () {
     Route::get('/email-template', 'index')->name('email-template');
