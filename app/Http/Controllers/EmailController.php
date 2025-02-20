@@ -19,7 +19,12 @@ class EmailController extends Controller
     {
         $data = DB::table('clients')
             ->get();
-        return DataTables::of($data)->make(true);
+        return DataTables::of($data)
+            ->addColumn('full_name', function ($user) {
+                return $user->first_name . ' ' . $user->last_name;
+            })
+            ->rawColumns(['full_name'])
+            ->make(true);
     }
 
     public function sendEmail(Request $request)

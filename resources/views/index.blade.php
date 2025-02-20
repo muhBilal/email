@@ -1,21 +1,30 @@
 @extends('layouts.app')
 @section('title', 'Home')
 @section('content')
-    <h1 class="text-2xl font-bold text-gray-800 mb-4">User Email Lists</h1>
-    <div>
-        <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" id="sendSelected">Kirim Email</button>
-        <button type="button" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" aria-haspopup="dialog"
-            aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-scale-animation-modal">
-            Kirim by wilayah
-        </button>
-        <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" id="sendAll">Kirim semua
-            client</button>
+    <div class="header mb-4">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold">User Email List</h1>
+                <p class="text-gray-400">Complete Collection of User Email Addresses</p>
+            </div>
+            <button class="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded flex items-center" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-create" data-hs-overlay="#modal-create"><i class="fas fa-plus mr-2"></i> Create</button>
+        </div>
+        <div class="mt-6 flex space-x-4">
+            <button class="bg-black text-white px-4 py-2 rounded flex items-center">
+                <i class="fas fa-paper-plane mr-2"></i> Kirim Email
+            </button>
+            <button type="button" class="border border-black text-black px-4 py-2 rounded flex items-center hover:bg-black hover:text-white" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-scale-animation-modal">
+                <i class="fas fa-users mr-2"></i> Kirim by wilayah
+            </button>
+            <button class="border border-black text-black px-4 py-2 rounded flex items-center hover:bg-black hover:text-white">
+                <i class="fas fa-user-friends mr-2"></i> Kirim semua client
+            </button>
+            <button type="button" class="border border-black text-black px-4 py-2 rounded flex items-center hover:bg-black hover:text-white" aria-haspopup="dialog" aria-expanded="false" aria-controls="importModal" data-hs-overlay="#importModal">
+                <i class="fas fa-file-import mr-2"></i> Import File
+            </button>
+        </div>
 
-
-        <button type="button" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" aria-haspopup="dialog"
-            aria-expanded="false" aria-controls="importModal" data-hs-overlay="#importModal">
-            Import File
-        </button>
+        
 
         <div id="importModal"
             class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
@@ -194,26 +203,31 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-end mb-4">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-create" data-hs-overlay="#modal-create">Create</button>
+
+    <div class="grid grid-cols-1 pb-6">
+        <div class="col-span-12 xl:col-span-6">
+            <div class="card">
+                <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+                    <table id="emailTable" class="min-w-full overflow-hidden divide-y divide-gray-200 rounded-t-lg">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    <input type="checkbox" id="checkAll">
+                                </th>
+                                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">ID</th>
+                                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Nama</th>
+                                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Email</th>
+                                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Telp</th>
+                                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
-        <table id="emailTable" class="stripe hover w-full">
-            <thead>
-                <tr>
-                    <th class="text-left px-4 py-2">
-                        <input type="checkbox" id="checkAll">
-                    </th>
-                    <th class="text-left px-4 py-2">ID</th>
-                    <th class="text-left px-4 py-2">Nama</th>
-                    <th class="text-left px-4 py-2">Email</th>
-                    <th class="text-left px-4 py-2">Telp</th>
-                    <th class="text-left px-4 py-2">Aksi</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+    
 
 @endsection
 
@@ -225,57 +239,135 @@
             $('#emailTable').DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                deferRender: true,
+                "initComplete": function(settings, json) {
+                    $('.dataTables_scrollBody thead tr').css({
+                        visibility: 'collapse'
+                    });
+                },
                 ajax: "{{ route('emailData') }}",
                 columns: [{
                         data: null,
                         orderable: false,
                         searchable: false,
-                        className: 'text-center px-4 py-2',
+                        className: 'text-left whitespace-nowrap px-6 py-4 border-b border-gray-200',
                         render(data) {
-                            return `<input type="checkbox" class="user-checkbox" value="${data.id}">`;
+                            return `<input type="checkbox" name="id[]" class="user-checkbox" value="${data.id}">`;
                         }
                     },
                     {
                         data: 'id',
                         name: 'id',
-                        className: 'text-left px-4 py-2'
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        },
+                        className: 'text-left whitespace-nowrap px-6 py-4 border-b border-gray-200'
                     },
                     {
-                        data: 'first_name',
-                        name: 'first_name',
-                        className: 'text-left px-4 py-2'
+                        data: 'full_name',
+                        name: 'full_name',
+                        className: 'text-left whitespace-nowrap px-6 py-4 border-b border-gray-200'
                     },
                     {
                         data: 'email',
                         name: 'email',
-                        className: 'text-left px-4 py-2'
+                        className: 'text-left whitespace-nowrap px-6 py-4 border-b border-gray-200'
                     },
                     {
                         data: 'phone_number',
                         name: 'no_telepon',
-                        className: 'text-left px-4 py-2'
+                        className: 'text-left whitespace-nowrap px-6 py-4 border-b border-gray-200'
                     },
                     {
                         data: null,
-                        className: 'text-left px-4 py-2',
+                        className: 'text-left whitespace-nowrap px-6 py-4 border-b border-gray-200',
                         render(data) {
                             return `<button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-700">Detail</button>`;
                         }
                     }
                 ],
                 language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Cari email...",
-                    lengthMenu: "Tampilkan _MENU_ data"
+                    "paginate": {
+                        "previous": "&laquo;",
+                        "next": "&raquo;"
+                    }
                 },
-                initComplete: function() {
-                    $("input[type='search']").addClass(
-                        "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-4 py-2"
-                        );
-                    $("select").addClass(
-                        "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-2 py-1"
-                        );
+                "pagingType": "simple_numbers",
+                "drawCallback": function(settings) {
+                    var paginateLinks = $('.paginate_button a');
+                    var paginateButton = $('.paginate_button');
+                    paginateLinks.each(function() {
+                        $(this).addClass('bg-transparent p-2');
+                    });
+                    paginateButton.each(function() {
+                        $(this).addClass('p-2');
+                    });
+                    $('.paginate_button.active a').addClass('bg-blue-600 text-white');
+
+                    $('.dataTables_scrollBody thead tr').css({
+                        visibility: 'collapse'
+                    });
+                },
+                "rowCallback": function(row, data, index) {
+                    $(row).find('.check-for-delete').on('click', function() {
+                        if ($(this).is(':checked')) {
+                            $(row).addClass('bg-blue-100');
+                        } else {
+                            $(row).removeClass('bg-blue-100');
+                        }
+                    });
+
+                    $('.btn-delete-data').addClass('hidden');
+                },
+            });
+
+            $(document).on('click', '.check-for-delete', function() {
+                let checked = $('.check-for-delete:checked').length;
+                if (checked > 0) {
+                    $('.btn-delete-data').removeClass('hidden');
+                } else {
+                    $('.btn-delete-data').addClass('hidden');
                 }
+            });
+            $(document).on('click', '.btn-delete-data', function() {
+                Swal.fire({
+                    title: 'Apakah anda yakin ingin menghapus data Regulasi Matriks?',
+                    text: "Data yang dihapus tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#5156BE',
+                    cancelButtonColor: '#FD625E',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let id = [];
+                        $('.check-for-delete:checked').each(function() {
+                            id.push($(this).val());
+                        });
+                        $.ajax({
+                            url: "",
+                            method: 'POST',
+                            data: {
+                                ids: id
+                            },
+                            success: function(data) {
+                                $('#myDataTable').DataTable().ajax.reload();
+                                $('.btn-delete-data').addClass('hidden');
+                                Swal.fire({
+                                    title: 'Berhasil Terhapus!',
+                                    text: 'Data Regulasi Matriks berhasil dihapus.',
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#5156BE',
+                                    confirmButtonText: 'oke',
+                                })
+                            }
+                        });
+                    }
+                })
             });
 
             $(document).on('change', '.user-checkbox', function() {
