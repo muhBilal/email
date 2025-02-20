@@ -12,7 +12,7 @@ class EmailController extends Controller
 {
     public function index()
     {
-        return view('');
+        return view('index');
     }
 
     public function getData()

@@ -26,7 +26,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'CheckUser')->name('login-user');
 });
 
+
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendEmail');
+Route::get('/', [EmailController::class, 'index'])->name('emailIndex');
 Route::get('/data', [EmailController::class, 'getData'])->name('emailData');
 Route::post('/import-client', [ClientController::class, 'importFile'])->name('importClient');
 
