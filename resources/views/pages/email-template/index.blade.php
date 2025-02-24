@@ -156,8 +156,6 @@
         </div>
     </div>
 
-    {{-- <input type="text" id="nama" name="id"> --}}
-    <button id="insert">Insert</button>
 @endsection
 
 @push('js')
@@ -185,7 +183,10 @@
                     {
                         data: 'content',
                         name: 'content',
-                        className: 'whitespace-nowrap px-6 py-4 border-b border-gray-200'
+                        className: 'whitespace-nowrap px-6 py-4 border-b border-gray-200',
+                        render: function(data) {
+                            return data.length > 20 ? data.substr(0, 20) + '...' : data;
+                        }
                     },
                     {
                         data: null,

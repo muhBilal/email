@@ -30,11 +30,10 @@ class EmailTemplateController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'content' => 'required|string|max:255',
+                'content' => 'required|string',
             ]);
 
             EmailTemplate::create($request->all());

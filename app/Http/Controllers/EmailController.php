@@ -41,7 +41,7 @@ class EmailController extends Controller
             $emails = $emailsQuery->get();
             $message = 'This is a test email';
             $subject = 'Email Promotion';
-            $templateId = 1;
+            $templateId = $request->template;
 
             foreach ($emails as $data) {
                 Mail::to($data->email)->send(new SendEmail($message, $subject, $templateId));

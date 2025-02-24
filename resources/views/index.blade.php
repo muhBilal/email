@@ -10,7 +10,7 @@
             <button class="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded flex items-center" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-create" data-hs-overlay="#modal-create"><i class="fas fa-plus mr-2"></i> Create</button>
         </div>
         <div class="mt-6 flex space-x-4">
-            <button class="bg-black text-white px-4 py-2 rounded flex items-center">
+            <button class="bg-black text-white px-4 py-2 rounded flex items-center" id='sendSelected'>
                 <i class="fas fa-paper-plane mr-2"></i> Kirim Email
             </button>
             <button type="button" class="border border-black text-black px-4 py-2 rounded flex items-center hover:bg-black hover:text-white" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-scale-animation-modal">
@@ -111,7 +111,7 @@
                             data-hs-overlay="#hs-scale-animation-modal">
                             Close
                         </button>
-                        <button type="button" id="sendCity"
+                        <button type="button" id="sendEmailBtn"
                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                             Save changes
                         </button>
@@ -119,6 +119,7 @@
                 </div>
             </div>
         </div>
+
         <div id="modal-create"
             class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
             role="dialog" tabindex="-1" aria-labelledby="modal-create-label">
@@ -307,6 +308,7 @@
         $(document).ready(function() {
             let selected = [];
             let type = 0;
+            let templateId = 0;
             $('#emailTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -401,6 +403,7 @@
                     $('.btn-delete-data').addClass('hidden');
                 }
             });
+
             $(document).on('click', '.btn-delete-data', function() {
                 Swal.fire({
                     title: 'Apakah anda yakin ingin menghapus data Regulasi Matriks?',
@@ -517,9 +520,12 @@
             })
 
             $(document).on('click', '#sendEmailBtn', function() {
-                let templateId = $('#template').val()
+                console.log("masuk");
+                templateId = $('#template').val()
+                console.log("template ", templateId);
                 switch (type) {
                     case 1:
+                console.log("masuk");
                         sendSelected(templateId);
                         break;
                     case 2:
@@ -564,7 +570,7 @@
                     data: {
                         _token: "{{ csrf_token() }}",
                         selectedEmail: selectedIds,
-                        template: templateid
+                        template: templateId
 
                     },
                     success: function(response) {

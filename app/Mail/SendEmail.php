@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 class SendEmail extends Mailable
 {
     use Queueable, SerializesModels;
+    
     public $emailMessage, $subject, $templateId;
+    
     /**
      * Create a new message instance.
      */
@@ -30,7 +32,6 @@ class SendEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            // subject: 'Send Email',
             subject: $this->subject,
         );
     }
@@ -38,19 +39,22 @@ class SendEmail extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content($templateId): Content
+    public function content(): Content
     {
-        // $template = EmailTemplate::where('id', $templateId)->first();
-        // return new Content(
-        //     view: 'mail',
-        //     with: [
-        //         'content' => $template->content ?? ''
-        //     ]
-        // );
+        $template = EmailTemplate::where('id', $this->templateId)->first();
+    
+        if (!$template) {
+            abort(404, 'Email template not found');
+        }
+    
         return new Content(
-            view: 'mail',
+            view: 'mail', 
+            with: [
+                'content' => $template->content, 
+            ]
         );
     }
+    
 
     /**
      * Get the attachments for the message.
