@@ -331,7 +331,7 @@
         </div>
     </div>
 
-    <button class="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded flex items-center"
+    <button class="bg-orange-500 hidden hover:bg-orange-700 text-white px-4 py-2 rounded flex items-center"
     id="updateModal"
         aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-update" data-hs-overlay="#modal-update"><i
             class="fas fa-plus mr-2"></i> update</button>
