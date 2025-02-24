@@ -23,7 +23,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('home')->with('success', 'Login berhasil!');
+            return redirect('/')->with('success', 'Login berhasil!');
         } else {
             return back()->with('fail', 'Email atau password salah.');
         }

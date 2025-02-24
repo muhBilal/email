@@ -18,7 +18,9 @@ class EmailTemplateController extends Controller
     {
         $data = DB::table('email_templates')
             ->get();
-        return DataTables::of($data)->make(true);
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->make(true);
     }
 
     public function create()
@@ -28,34 +30,39 @@ class EmailTemplateController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'content' => 'required|string|max:255',
-        ]);
+        // dd($request->all());
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'content' => 'required|string|max:255',
+            ]);
 
-        EmailTemplate::create($request->all());
-        return redirect()->route('emailTemplates.index')
-            ->with('success', 'Template berhasil ditambahkan.');
+            EmailTemplate::create($request->all());
+            return redirect()->route('email-template.index')
+                ->with('success', 'Template berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            dd('error', $e->getMessage());
+            return redirect()->route('email-template.index')
+                ->with('error', $e->getMessage());
+        }
     }
 
     public function edit($id)
     {
         try {
             $template = EmailTemplate::findOrFail($id);
-            return response()->json([
-                'status' => 'success',
-                'data' => $template
-            ]);
+            return response()->json($template);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
-            ]);
+            ], 500);
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->id;
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -64,15 +71,11 @@ class EmailTemplateController extends Controller
 
             $template = EmailTemplate::findOrFail($id);
             $template->update($request->all());
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Template berhasil diperbarui.'
-            ]);
+            return redirect()->route('email-template.index')
+                ->with('success', 'Template berhasil di update.');
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
+            return redirect()->route('email-template.index')
+                ->with('error', 'Template gagal di update.');
         }
     }
 
