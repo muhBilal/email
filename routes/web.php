@@ -27,12 +27,22 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendEmail');
-Route::get('/', [EmailController::class, 'index'])->name('emailIndex');
-Route::get('/data', [EmailController::class, 'getData'])->name('emailData');
-Route::post('/import-client', [ClientController::class, 'importFile'])->name('importClient');
+Route::controller(ClientController::class)->group(function () {
+    // Route::get('/client', 'index')->name('clientIndex');
+    // Route::get('/client/data', 'getData')->name('clientData');
+    // Route::get('/client/create', 'create')->name('clientCreate');
+    Route::post('/client/store', 'store')->name('clientStore');
+    Route::get('/client/get', 'get')->name('clientGet');
+    Route::put('/client/update', 'update')->name('clientUpdate');
+    Route::delete('/client/delete', 'destroy')->name('clientDelete');
+    Route::delete('/import-client', 'importFile')->name('importClient');
+});
 
-Route::get('/data', 'App\Http\Controllers\EmailController@getData')->name('emailData');
+Route::controller(EmailController::class)->group(function () {
+    Route::get('/', 'index')->name('emailIndex');
+    Route::get('/data', 'getData')->name('emailData');
+    Route::post('/send-email', 'sendEmail')->name('sendEmail');
+});
 
 Route::name('email-template.')->controller(EmailTemplateController::class)->group(function () {
     Route::get('/email-template', 'index')->name('index');

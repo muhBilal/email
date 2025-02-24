@@ -40,7 +40,6 @@ class EmailTemplateController extends Controller
             return redirect()->route('email-template.index')
                 ->with('success', 'Template berhasil ditambahkan.');
         } catch (\Exception $e) {
-            dd('error', $e->getMessage());
             return redirect()->route('email-template.index')
                 ->with('error', $e->getMessage());
         }
