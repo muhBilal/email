@@ -1,12 +1,18 @@
 @extends('layouts.app')
 @section('title', 'Template')
 @section('content')
-    <h1 class="text-2xl font-bold text-gray-800 mb-4">Template</h1>
 
-    <div class="flex justify-end mb-4">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-create" data-hs-overlay="#modal-create">Create</button>
-    </div>
-    <div>
+    <div class="header mb-4">
+
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold">Template</h1>
+                <p class="text-gray-400">Complete Collection of Email Templates</p>
+            </div>
+        <button class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-700" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-create" data-hs-overlay="#modal-create">Create</button>
+
+        </div>
+
         <div id="modal-create"
             class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
             role="dialog" tabindex="-1" aria-labelledby="modal-create-label">
@@ -33,24 +39,12 @@
                         <form action="">
                             <div class="space-y-3">
                                 <label for="hs-leading-icon" class="block text-sm font-medium mb-">Nama</label>
-                                <input type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <input type="text" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                               </div>
                               <div class="space-y-3 mt-5">
-                                <label for="hs-leading-icon" class="block text-sm font-medium mb-">HTML File</label>
-                                  <label class="block">
-                                    <span class="sr-only">Choose HTML files</span>
-                                    <input type="file" class="block w-full text-sm text-gray-500
-                                      file:me-4 file:py-2 file:px-4
-                                      file:rounded-lg file:border-0
-                                      file:text-sm file:font-semibold
-                                      file:bg-blue-600 file:text-white
-                                      hover:file:bg-blue-700
-                                      file:disabled:opacity-50 file:disabled:pointer-events-none
-                                      dark:text-neutral-500
-                                      dark:file:bg-blue-500
-                                      dark:hover:file:bg-blue-400
-                                    ">
-                                  </label>
+                                <label for="hs-leading-icon" class="block text-sm font-medium mb-2">Teks HTML</label>
+                                <textarea name="codeEditor" rows="10" class="w-full text-sm font-mono bg-gray-900 text-green-400 border border-gray-700 rounded-md focus:outline-none " placeholder="// Tulis HTML disini">
+                                  </textarea>
                               </div>
 
                         </form>
@@ -71,16 +65,16 @@
         </div>
     </div>
     <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
-        <table id="emailTable" class="stripe hover w-full">
-            <thead>
+        <table id="emailTable" class="min-w-full overflow-hidden divide-y divide-gray-200 rounded-t-lg">
+            <thead class="bg-gray-50">
                 <tr>
-                    <th class="text-left px-4 py-2">
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         <input type="checkbox" id="checkAll">
                     </th>
-                    <th class="text-left px-4 py-2">ID</th>
-                    <th class="text-left px-4 py-2">Nama</th>
-                    <th class="text-left px-4 py-2">Preview</th>
-                    <th class="text-left px-4 py-2">Aksi</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">ID</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Nama</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Preview</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Aksi</th>
                 </tr>
             </thead>
         </table>
@@ -92,14 +86,21 @@
     <script>
         $(document).ready(function() {
             $('#emailTable').DataTable({
+                deferRender: true,
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                "initComplete": function(settings, json) {
+                    $('.dataTables_scrollBody thead tr').css({
+                        visibility: 'collapse'
+                    });
+                },
                 ajax: "{{ route('email-template-data') }}",
                 columns: [{
                         data: null,
                         orderable: false,
                         searchable: false,
-                        className: 'text-center px-4 py-2',
+                        className: 'whitespace-nowrap px-6 py-4 border-b border-gray-200',
                         render(data) {
                             return `<input type="checkbox" class="user-checkbox" value="${data.id}">`;
                         }
@@ -107,21 +108,21 @@
                     {
                         data: 'id',
                         name: 'id',
-                        className: 'text-left px-4 py-2'
+                        className: 'whitespace-nowrap px-6 py-4 border-b border-gray-200'
                     },
                     {
                         data: 'name',
                         name: 'name',
-                        className: 'text-left px-4 py-2'
+                        className: 'whitespace-nowrap px-6 py-4 border-b border-gray-200'
                     },
                     {
                         data: 'content',
                         name: 'content',
-                        className: 'text-left px-4 py-2'
+                        className: 'whitespace-nowrap px-6 py-4 border-b border-gray-200'
                     },
                     {
                         data: null,
-                        className: 'text-left px-4 py-2',
+                        className: 'whitespace-nowrap px-6 py-4 border-b border-gray-200',
                         render(data) {
                             return `
                                 <button onclick="updateEmail(${data.id})" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700">Update</button>
@@ -131,20 +132,42 @@
                         }
                     }
                 ],
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Cari email...",
-                    lengthMenu: "Tampilkan _MENU_ data"
+                "language": {
+                    "paginate": {
+                        "previous": "&laquo;",
+                        "next": "&raquo;"
+                    }
                 },
-                initComplete: function() {
-                    $("input[type='search']").addClass(
-                        "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-4 py-2"
-                        );
-                    $("select").addClass(
-                        "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-2 py-1"
-                        );
+                "pagingType": "simple_numbers",
+                "drawCallback": function(settings) {
+                    var paginateLinks = $('.paginate_button a');
+                    var paginateButton = $('.paginate_button');
+                    paginateLinks.each(function() {
+                        $(this).addClass('bg-transparent p-2');
+                    });
+                    paginateButton.each(function() {
+                        $(this).addClass('p-2');
+                    });
+                    $('.paginate_button.active a').addClass('bg-blue-600 text-white');
+
+                    $('.dataTables_scrollBody thead tr').css({
+                        visibility: 'collapse'
+                    });
+                },
+                
+                "rowCallback": function(row, data, index) {
+                    $(row).find('.check-for-delete').on('click', function() {
+                        if ($(this).is(':checked')) {
+                            $(row).addClass('bg-blue-100');
+                        } else {
+                            $(row).removeClass('bg-blue-100');
+                        }
+                    });
+
+                    $('.btn-delete-data').addClass('hidden');
                 }
             });
+                
 
             $(document).on('change', '.user-checkbox', function() {
                 let selected = [];
@@ -153,6 +176,7 @@
                 });
                 console.log(selected);
             });
+            
 
             $(document).on('change', '#checkAll', function() {
                 $('.user-checkbox').prop('checked', this.checked);

@@ -28,6 +28,7 @@
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -63,7 +64,7 @@
   <link rel="stylesheet" href="https://preline.co/assets/css/main.min.css">
 </head>
 
-<body class="bg-gray-50 dark:bg-neutral-900">
+<body class="bg-[#fef2ea]">
   <!-- ========== HEADER ========== -->
   <header class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 lg:ps-[260px] dark:bg-neutral-800 dark:border-neutral-700">
     @include('layouts.navbar')
