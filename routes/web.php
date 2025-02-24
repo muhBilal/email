@@ -19,20 +19,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-})->middleware(['auth'])->name('home');
+})->middleware(['auth'])->name('index');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
     Route::post('/login', 'CheckUser')->name('login-user');
 });
 
-
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendEmail');
-Route::get('/', [EmailController::class, 'index'])->name('emailIndex');
 Route::get('/data', [EmailController::class, 'getData'])->name('emailData');
 Route::post('/import-client', [ClientController::class, 'importFile'])->name('importClient');
-
-Route::get('/data', 'App\Http\Controllers\EmailController@getData')->name('emailData');
+// Route::get('/data', 'App\Http\Controllers\EmailController@getData')->name('emailData');
 
 Route::controller(EmailTemplateController::class)->group(function () {
     Route::get('/email-template', 'index')->name('email-template');

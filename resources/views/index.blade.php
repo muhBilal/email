@@ -3,7 +3,8 @@
 @section('content')
     <h1 class="text-2xl font-bold text-gray-800 mb-4">User Email Lists</h1>
     <div>
-        <button class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" id="sendSelected">Kirim Email</button>
+        <button class="hidden bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" id="sendSelected">Kirim
+            Email</button>
         <button type="button" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-700" aria-haspopup="dialog"
             aria-expanded="false" aria-controls="hs-scale-animation-modal" data-hs-overlay="#hs-scale-animation-modal">
             Kirim by wilayah
@@ -46,8 +47,7 @@
                             placeholder="Choose file" required>
                     </div>
                     <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
-                        <button type="button"
-                            id="closeModalImport"
+                        <button type="button" id="closeModalImport"
                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                             data-hs-overlay="#importModal">
                             Close
@@ -125,9 +125,9 @@
                             class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none"
                             aria-label="Close" data-hs-overlay="#modal-create">
                             <span class="sr-only">Close</span>
-                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 6 6 18"></path>
                                 <path d="m6 6 12 12"></path>
                             </svg>
@@ -138,44 +138,59 @@
 
                             <div class="space-y-3">
                                 <div>
-                                  <label for="hs-leading-icon" class="block text-sm font-medium mb-">Nama</label>
-                                  <div class="sm:flex rounded-lg shadow-sm">
-                                    <span class="py-3 px-4 inline-flex items-center min-w-fit w-full border border-gray-200 bg-gray-50 text-sm text-gray-500 -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:w-auto sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg dark:bg-neutral-700 dark:border-neutral-700 dark:text-neutral-400">First and last name</span>
-                                    <input type="text" class="py-3 px-4 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                    <input type="text" class="py-3 px-4 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                  </div>
+                                    <label for="hs-leading-icon" class="block text-sm font-medium mb-">Nama</label>
+                                    <div class="sm:flex rounded-lg shadow-sm">
+                                        <span
+                                            class="py-3 px-4 inline-flex items-center min-w-fit w-full border border-gray-200 bg-gray-50 text-sm text-gray-500 -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:w-auto sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg dark:bg-neutral-700 dark:border-neutral-700 dark:text-neutral-400">First
+                                            and last name</span>
+                                        <input type="text"
+                                            class="py-3 px-4 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <input type="text"
+                                            class="py-3 px-4 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="max-w-sm space-y-3">
                                 <div>
-                                  <label for="hs-leading-icon" class="block text-sm font-medium mb-">Email</label>
-                                  <div class="relative">
-                                    <input type="text" id="hs-leading-icon" name="hs-leading-icon" class="py-3 px-4 ps-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="you@site.com">
-                                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
-                                      <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                                      </svg>
+                                    <label for="hs-leading-icon" class="block text-sm font-medium mb-">Email</label>
+                                    <div class="relative">
+                                        <input type="text" id="hs-leading-icon" name="hs-leading-icon"
+                                            class="py-3 px-4 ps-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                            placeholder="you@site.com">
+                                        <div
+                                            class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
+                                            <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-600"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                            </svg>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
+                            </div>
 
-                              <div class="max-w-sm space-y-3">
+                            <div class="max-w-sm space-y-3">
                                 <div>
-                                  <label for="hs-inline-leading-select-label" class="block text-sm font-medium mb-2">Telepon</label>
-                                  <div class="relative">
-                                    <input type="text" id="hs-inline-leading-select-label" name="inline-add-on" class="py-3 px-4 ps-20 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="xxx-xxxx-xxx">
-                                    <div class="absolute inset-y-0 start-0 flex items-center text-gray-500 ps-px">
-                                      <label for="hs-inline-leading-select-country" class="sr-only">Country</label>
-                                      <select id="hs-inline-leading-select-country" name="hs-inline-leading-select-country" class="block w-full border-transparent rounded-lg focus:ring-blue-600 focus:border-blue-600 dark:text-neutral-500 dark:bg-neutral-800 text-sm">
-                                        <option>+62</option>
-                                      </select>
+                                    <label for="hs-inline-leading-select-label"
+                                        class="block text-sm font-medium mb-2">Telepon</label>
+                                    <div class="relative">
+                                        <input type="text" id="hs-inline-leading-select-label" name="inline-add-on"
+                                            class="py-3 px-4 ps-20 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                            placeholder="xxx-xxxx-xxx">
+                                        <div class="absolute inset-y-0 start-0 flex items-center text-gray-500 ps-px">
+                                            <label for="hs-inline-leading-select-country" class="sr-only">Country</label>
+                                            <select id="hs-inline-leading-select-country"
+                                                name="hs-inline-leading-select-country"
+                                                class="block w-full border-transparent rounded-lg focus:ring-blue-600 focus:border-blue-600 dark:text-neutral-500 dark:bg-neutral-800 text-sm">
+                                                <option>+62</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
+                            </div>
 
                         </form>
                     </div>
@@ -195,7 +210,8 @@
         </div>
     </div>
     <div class="flex justify-end mb-4">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700" aria-haspopup="dialog" aria-expanded="false" aria-controls="modal-create" data-hs-overlay="#modal-create">Create</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700" aria-haspopup="dialog"
+            aria-expanded="false" aria-controls="modal-create" data-hs-overlay="#modal-create">Create</button>
     </div>
 
     <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
@@ -215,13 +231,70 @@
         </table>
     </div>
 
+    <button id="templateModal" type="button"
+        class="inline-flex py-3 px-4 items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+        aria-haspopup="dialog" aria-expanded="false" aria-controls="template-modal" data-hs-overlay="#template-modal">
+        Open modal
+    </button>
+
+    <div id="template-modal"
+        class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
+        role="dialog" tabindex="-1" aria-labelledby="template-modal-label">
+        <div
+            class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
+            <div
+                class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                    <h3 id="template-modal-label" class="font-bold text-gray-800 dark:text-white">
+                        Pilih Template
+                    </h3>
+                    <button type="button"
+                        class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600"
+                        aria-label="Close" data-hs-overlay="#template-modal">
+                        <span class="sr-only">Close</span>
+                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                @php
+                    $template = DB::table('email_templates')->get();
+                @endphp
+                <div class="p-4 overflow-y-auto">
+                    <label for="template" class="block text-sm font-medium text-gray-700 mb-2">Pilih Template</label>
+                    <select id="template" name="template"
+                        class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">-- Pilih Template --</option>
+                        @foreach ($template as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                    <button type="button"
+                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                        data-hs-overlay="#template-modal">
+                        Close
+                    </button>
+                    <button type="button" id="sendEmailBtn"
+                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                        Save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('js')
     <script>
         $(document).ready(function() {
             let selected = [];
-
+            let type = 0;
             $('#emailTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -271,19 +344,25 @@
                 initComplete: function() {
                     $("input[type='search']").addClass(
                         "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-4 py-2"
-                        );
+                    );
                     $("select").addClass(
                         "border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg px-2 py-1"
-                        );
+                    );
                 }
             });
 
             $(document).on('change', '.user-checkbox', function() {
                 let selected = [];
+
                 $('.user-checkbox:checked').each(function() {
                     selected.push($(this).val());
                 });
-                console.log(selected);
+
+                if (selected.length > 0) {
+                    $('#sendSelected').removeClass('hidden');
+                } else {
+                    $('#sendSelected').addClass('hidden');
+                }
             });
 
             $(document).on('change', '#checkAll', function() {
@@ -292,45 +371,11 @@
                 $('.user-checkbox:checked').each(function() {
                     selected.push($(this).val());
                 });
-                console.log(selected);
-            });
-
-            $(document).on('click', '#sendCity', function() {
-                $.ajax({
-                    url: "{{ route('sendEmail') }}",
-                    type: 'POST',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        city: $('#wilayah').val()
-                    },
-                    success: function(response) {
-                        let status = response.status;
-                        if (status == 'success') {
-                            alert('Email berhasil dikirim');
-                        } else {
-                            alert('Email gagal dikirim');
-                        }
-                    }
-                });
-            });
-
-            $(document).on('click', '#sendAll', function() {
-                $.ajax({
-                    url: "{{ route('sendEmail') }}",
-                    type: 'POST',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        city: null
-                    },
-                    success: function(response) {
-                        let status = response.status;
-                        if (status == 'success') {
-                            alert('Email berhasil dikirim');
-                        } else {
-                            alert('Email gagal dikirim');
-                        }
-                    }
-                });
+                if (selected.length > 0) {
+                    $('#sendSelected').removeClass('hidden');
+                } else {
+                    $('#sendSelected').addClass('hidden');
+                }
             });
 
             $(document).on('click', '#importFile', function() {
@@ -353,7 +398,6 @@
                     contentType: false,
                     success: function(response) {
                         if (response.status === 'success') {
-                            // alert('File berhasil diimport');
                             $('#importModal').removeClass('hs-overlay-open');
                         } else {
 
@@ -367,19 +411,46 @@
 
             });
 
-            $(document).on('click', '#sendSelected', function(){
-                let selectedIds = [];
-                $(".user-checkbox:checked").each(function() {
-                    selectedIds.push($(this).val()); 
-                });
-                // console.log("Selected IDs:", selectedIds);
-                //send ajax to send email
+            $(document).on('click', '#sendCity', function() {
+                type = 2;
+                $('#templateModal').click();
+            });
+
+            $(document).on('click', '#sendAll', function() {
+                type = 3;
+                $('#templateModal').click();
+            });
+
+            $(document).on('click', '#sendSelected', function() {
+                type = 1;
+                $('#templateModal').click();
+            })
+
+            $(document).on('click', '#sendEmailBtn', function() {
+                let templateId = $('#template').val()
+                switch (type) {
+                    case 1:
+                        sendSelected(templateId);
+                        break;
+                    case 2:
+                        sendByCity(templateId);
+                        break;
+                    case 3:
+                        sendAll(templateId);
+                        break;
+                    default:
+                        alert("pililh template terlebih dahulu")
+                }
+            })
+
+            function sendAll(templateid) {
                 $.ajax({
                     url: "{{ route('sendEmail') }}",
                     type: 'POST',
                     data: {
                         _token: "{{ csrf_token() }}",
-                        selectedEmail: selectedIds
+                        city: null,
+                        template: templateid
                     },
                     success: function(response) {
                         let status = response.status;
@@ -390,7 +461,52 @@
                         }
                     }
                 });
-            })
+            }
+
+            function sendSelected(templateId) {
+                let selectedIds = [];
+                $(".user-checkbox:checked").each(function() {
+                    selectedIds.push($(this).val());
+                });
+                $.ajax({
+                    url: "{{ route('sendEmail') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        selectedEmail: selectedIds,
+                        template: templateid
+
+                    },
+                    success: function(response) {
+                        let status = response.status;
+                        if (status == 'success') {
+                            alert('Email berhasil dikirim');
+                        } else {
+                            alert('Email gagal dikirim');
+                        }
+                    }
+                });
+            }
+
+            function sendByCity(templateId) {
+                $.ajax({
+                    url: "{{ route('sendEmail') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        city: $('#wilayah').val(),
+                        template: templateid
+                    },
+                    success: function(response) {
+                        let status = response.status;
+                        if (status == 'success') {
+                            alert('Email berhasil dikirim');
+                        } else {
+                            alert('Email gagal dikirim');
+                        }
+                    }
+                });
+            }
         });
     </script>
 @endpush
