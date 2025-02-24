@@ -64,7 +64,7 @@ class EmailTemplateController extends Controller
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'content' => 'required|string|max:255',
+                'content' => 'required|string',
             ]);
 
             $template = EmailTemplate::findOrFail($id);
